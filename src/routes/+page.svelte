@@ -5,11 +5,10 @@
 		{ done: false, text: 'build an app', timerrun: false, seconds: 0 },
 		{ done: false, text: 'world domination', timerrun: false, seconds: 0}
 	];
+	let autosave = true;
 	if (typeof window !== 'undefined') {
 			  loaddata();
 			} 
-
-
 	var timerVariable = setInterval(countUpTimer, 1000);	
 	let secondsaftersave = 0;
 
@@ -23,9 +22,9 @@
 			}
 					}
 		secondsaftersave++;
-		if(secondsaftersave > 60){
+		if(secondsaftersave > 6){
 			secondsaftersave = 0;
-			if (typeof window !== 'undefined') {
+			if (typeof window !== 'undefined' && autosave === true) {
 			  savedata();
 			} 
 		}
@@ -41,20 +40,21 @@
 	function stopalltimers() {
 		for (let i = 0; i < remaining; i++){
 			todos[i].timerrun = false
-				
-			
-
-
+						
 		}	}
 
 	function clear() {
 		todos = todos.filter(t => !t.done);
 	}
 	function loaddata(){
+
 		const localstorageload = localStorage.getItem("Settings");
-		const parsedObj = JSON.parse(localstorageload);
+		if (localstorageload != 'undefined' && localstorageload !== null){
+			const parsedObj = JSON.parse(localstorageload);
 		todos = parsedObj;
 		console.log('Loading Data');
+		}
+
 
 	}
 	function savedata(){
@@ -112,3 +112,8 @@
 <button on:click={savedata}>
 	Sava Data
 </button>
+<br>
+<label>
+	<input type=checkbox bind:checked={autosave}>
+	AutoSave
+</label>
