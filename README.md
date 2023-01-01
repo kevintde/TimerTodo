@@ -1,3 +1,9 @@
+# TimerTodo
+TimerTodo is a simple Svelte application to monitor the used time of Todos.
+
+
+
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
