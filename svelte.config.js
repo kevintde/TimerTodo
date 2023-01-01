@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-node';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -7,4 +7,9 @@ const config = {
 	}
 };
 
-export default config;
+export default {
+	kit: {
+  
+	adapter: adapter({ out: 'buildexport' })
+	}
+  };

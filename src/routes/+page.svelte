@@ -1,5 +1,4 @@
 <script>
-
 	import Box from './Box.svelte';
 	let todos = [
 		{ done: false, text: 'finish Svelte tutorial', timerrun: false, seconds: 0 },
