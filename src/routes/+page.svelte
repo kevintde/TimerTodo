@@ -35,7 +35,6 @@
 
 	function add() {
 		todos = todos.concat({ done: false, text: '' , timerrun: false, seconds: 0});
-		timers = timers.concat({seconds: 0, minutes: 0, timerrun: false, seconds: 0});
 	}
 	function stopalltimers() {
 		for (let i = 0; i < remaining; i++){
