@@ -28,6 +28,14 @@
 		todos = todos.concat({ done: false, text: '' , timerrun: false, seconds: 0});
 		timers = timers.concat({seconds: 0, minutes: 0, timerrun: false, seconds: 0});
 	}
+	function stopalltimers() {
+		for (let i = 0; i < remaining; i++){
+			todos[i].timerrun = false
+				
+			
+
+
+		}	}
 
 	function clear() {
 		todos = todos.filter(t => !t.done);
@@ -44,9 +52,9 @@
 		<input placeholder="What needs to be done?" bind:value={todo.text}	disabled={todo.done}	>
 			<br>
 		<input	type=checkbox bind:checked={todo.timerrun}	>
-		<input type=text bind:value={todo.seconds}>
+		<input type=number bind:value={todo.seconds}>
 		
-		<p><strong>Minuten:</strong> {todo.seconds / 60}</p>
+		<p><strong>Minuten:</strong> {(todo.seconds / 60).toFixed(2)}</p>
 
 
 
@@ -59,6 +67,9 @@
 
 <button on:click={add}>
 	Add new
+</button>
+<button on:click={stopalltimers}>
+	Stop all Timers
 </button>
 
 <button on:click={clear}>
