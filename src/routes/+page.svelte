@@ -45,6 +45,7 @@
 	function clear() {
 		todos = todos.filter(t => !t.done);
 	}
+	//Loading data from local Storage
 	function loaddata(){
 
 		const localstorageload = localStorage.getItem("Settings");
@@ -56,6 +57,7 @@
 
 
 	}
+	//Saving data to local Storage
 	function savedata(){
 		// convert object to JSON string
 		// using JSON.stringify()
@@ -92,6 +94,7 @@
 {/each}
 
 <p>{remaining} remaining</p>
+
 
 <button on:click={add}>
 	Add new
