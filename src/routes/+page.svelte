@@ -1,27 +1,38 @@
 <script>
-	import Box from './Box.svelte';
-	var timerVariable = setInterval(countUpTimer, 1000);	
-	
 
-	
+	import Box from './Box.svelte';
 	let todos = [
 		{ done: false, text: 'finish Svelte tutorial', timerrun: false, seconds: 0 },
 		{ done: false, text: 'build an app', timerrun: false, seconds: 0 },
 		{ done: false, text: 'world domination', timerrun: false, seconds: 0}
 	];
-	$: remaining = todos.filter(t => !t.done).length;
+	if (typeof window !== 'undefined') {
+			  loaddata();
+			} 
 
+
+	var timerVariable = setInterval(countUpTimer, 1000);	
+	let secondsaftersave = 0;
+
+	
+
+	$: remaining = todos.filter(t => !t.done).length;
 	function countUpTimer(){
 		for (let i = 0; i < remaining; i++){
 			if(todos[i].timerrun == true){
 				todos[i].seconds = todos[i].seconds +1;
 			}
-
-
+					}
+		secondsaftersave++;
+		if(secondsaftersave > 60){
+			secondsaftersave = 0;
+			if (typeof window !== 'undefined') {
+			  savedata();
+			} 
 		}
-		
 
 	}
+
 
 
 	function add() {
@@ -40,6 +51,25 @@
 	function clear() {
 		todos = todos.filter(t => !t.done);
 	}
+	function loaddata(){
+		const localstorageload = localStorage.getItem("Settings");
+		const parsedObj = JSON.parse(localstorageload);
+		todos = parsedObj;
+		console.log('Loading Data');
+
+	}
+	function savedata(){
+		// convert object to JSON string
+		// using JSON.stringify()
+		const jsonObj = JSON.stringify(todos);
+
+		// save to localStorage
+		localStorage.setItem("Settings", jsonObj);
+		console.log('Saving Data');
+
+	}
+
+
 
 </script>
 
@@ -74,4 +104,12 @@
 
 <button on:click={clear}>
 	Clear completed
+</button>
+<br>
+
+<button on:click={loaddata}>
+	Load Data
+</button>
+<button on:click={savedata}>
+	Sava Data
 </button>
