@@ -3,5 +3,6 @@ version: '3.9'
 services:
     web:
         image: ghcr.io/kevintde/timertodo:v0.0.2
+        restart: unless-stopped
         ports: 
             - "3000:3000"
